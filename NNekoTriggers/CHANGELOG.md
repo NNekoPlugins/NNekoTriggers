@@ -1,3 +1,5 @@
+v1.4 - Buxfixes
+- Addresses a bug with DTR toggles no longer working for left clicks.
 v1.3 - Command Handler Improvments
 - Added support for passing arguments
 - Made commands and arguments case insensitive

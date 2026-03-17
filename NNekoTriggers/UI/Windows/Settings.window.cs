@@ -44,55 +44,55 @@ namespace NNekoTriggers.UI.Windows
         public override void Draw()
         {
             var config = Utils.GetCharacterConfig();
-            var mgr = NNekoTriggers.WindowManager;
+            //var mgr = NNekoTriggers.WindowManager;
             // Top-level config options.
             if (ImGui.Checkbox($"Enable {NNekoTriggers.PluginInterface.Manifest.Name}", ref config.PluginEnabled))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.SameLine();
             ImGui.BeginDisabled(!config.PluginEnabled);
             if (ImGui.Checkbox("Show in Server Info Bar", ref config.ShowInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.BeginDisabled(!config.ShowInDtr);
             if (ImGui.Checkbox("RP Only", ref config.RpOnlyInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.SameLine();
             if (ImGui.Checkbox("RNG", ref config.RngInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.SameLine();
             if (ImGui.Checkbox("Zone Change", ref config.ZoneInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.SameLine();
             if (ImGui.Checkbox("Job Swap", ref config.GsetInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.SameLine();
             if (ImGui.Checkbox("Login", ref config.OnLoginInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.SameLine();
             if (ImGui.Checkbox("Override", ref config.OcmdInDtr))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.EndDisabled();
 
@@ -100,13 +100,13 @@ namespace NNekoTriggers.UI.Windows
             {
                 NNekoTriggers.PluginConfiguration.Save();
                 PluginLog.Information($"NNekoTriggers RP Only Module {(config.EnableRpOnly ? "Enabled" : "Disabled")}");
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
 
             if (ImGui.Checkbox("Enable RNG feature", ref config.EnableRNG))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
 
             ImGui.BeginDisabled(!config.EnableRNG);
@@ -120,13 +120,13 @@ namespace NNekoTriggers.UI.Windows
                 if (ImGui.InputInt("Min", ref config.OddsMin, 1, 25))
                 {
                     NNekoTriggers.PluginConfiguration.Save();
-                    mgr.UpdateDtrEntry();
+                    NNekoTriggers.WindowManager.UpdateDtrEntry();
                 }
                 ImGui.TableSetColumnIndex(1);
                 if (ImGui.InputInt("Max", ref config.OddsMax, 1, 25))
                 {
                     NNekoTriggers.PluginConfiguration.Save();
-                    mgr.UpdateDtrEntry();
+                    NNekoTriggers.WindowManager.UpdateDtrEntry();
                 }
                 ImGui.EndTable();
                 ImGui.EndDisabled();
@@ -136,7 +136,7 @@ namespace NNekoTriggers.UI.Windows
             if (ImGui.Checkbox("Enable Gearset Swap feature", ref config.EnableGset))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.BeginDisabled(!config.EnableGset);
             var gearsetCmd = config.GearsetCommand;
@@ -149,7 +149,7 @@ namespace NNekoTriggers.UI.Windows
                     gearsetCmd.Content = gscmdslot;
                     config.GearsetCommand = gearsetCmd;
                     NNekoTriggers.PluginConfiguration.Save();
-                    mgr.UpdateDtrEntry();
+                    NNekoTriggers.WindowManager.UpdateDtrEntry();
                 }
             }
 #pragma warning restore CS8601 // Possible null reference assignment.
@@ -158,7 +158,7 @@ namespace NNekoTriggers.UI.Windows
             if (ImGui.Checkbox("Enable Zone feature", ref config.EnableZones))
             {
                 NNekoTriggers.PluginConfiguration.Save();
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.BeginDisabled(!config.EnableZones);
             var territoryCmd = config.ZoneCommand;
@@ -171,7 +171,7 @@ namespace NNekoTriggers.UI.Windows
                     territoryCmd.Content = tcmdslot;
                     config.ZoneCommand = territoryCmd;
                     NNekoTriggers.PluginConfiguration.Save();
-                    mgr.UpdateDtrEntry();
+                    NNekoTriggers.WindowManager.UpdateDtrEntry();
                 }
             }
 #pragma warning restore CS8601 // Possible null reference assignment.
@@ -181,7 +181,7 @@ namespace NNekoTriggers.UI.Windows
             {
                 NNekoTriggers.PluginConfiguration.Save();
                 PluginLog.Information($"NNekoTriggers Login Module {(config.EnableOnLogin ? "Enabled" : "Disabled")}");
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.BeginDisabled(!config.EnableOnLogin);
             var onLoginCmd = config.OnLoginCommand;
@@ -203,7 +203,7 @@ namespace NNekoTriggers.UI.Windows
             {
                 NNekoTriggers.PluginConfiguration.Save();
                 PluginLog.Information($"NNekoTriggers Override Module {(config.EnableOcmd ? "Enabled" : "Disabled")}");
-                mgr.UpdateDtrEntry();
+                NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
             ImGui.BeginDisabled(!config.EnableOcmd);
             var defaultCmd = config.OverrideCommand;
