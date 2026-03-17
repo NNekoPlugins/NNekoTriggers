@@ -133,7 +133,7 @@ namespace NNekoTriggers.UI
                         NNekoTriggers.WindowManager.UpdateDtrEntry();
                     }
                 };
-                NNekoTriggers.WindowManager.UpdateDtrEntry();
+                //NNekoTriggers.WindowManager.UpdateDtrEntry();
             }
         }
 
