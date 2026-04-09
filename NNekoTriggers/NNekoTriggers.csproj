@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/14.0.2">
+
+  <!-- Plugin metadata -->
   <PropertyGroup>
     <Name>NNekoTriggers</Name>
     <Author>NaughtyNeko</Author>
@@ -18,28 +20,20 @@
     <PackageLicenseExpression>APGL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
+  <!-- Version stamping (GitVersion supplied by CI workflow) -->
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+    <!-- Fallback version if GitVersion is not provided -->
     <Version>0.0.0</Version>
-    <!-- fallback -->
+
+    <!-- These will be set by /p:GitVersion=1.2.3 in your workflow -->
     <AssemblyVersion>$(GitVersion)</AssemblyVersion>
     <FileVersion>$(GitVersion)</FileVersion>
     <InformationalVersion>$(GitVersion)</InformationalVersion>
   </PropertyGroup>
 
-
-  <PropertyGroup>
-    <Version>1.0.0</Version>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <SourceRevisionId Condition="'$(GITHUB_SHA)' != ''">$(GITHUB_SHA)</SourceRevisionId>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Reflection.AssemblyInformationalVersionAttribute">
-      <_Parameter1>$(Version)+$(SourceRevisionId)</_Parameter1>
-    </AssemblyAttribute>
-  </ItemGroup>
-
-
+  <!-- Build settings -->
   <PropertyGroup>
     <Deterministic>true</Deterministic>
     <CopyLocalLockfileAssemblies>true</CopyLocalLockfileAssemblies>
@@ -48,6 +42,7 @@
     <NoWarn>$(NoWarn);IDE1006,CS8618,MSB3270</NoWarn>
   </PropertyGroup>
 
+  <!-- Resources -->
   <ItemGroup>
     <Content Include=".\images\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -57,17 +52,18 @@
     <Content Include="CHANGELOG.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="ECommons" Version="3.1.0.22" />
-  </ItemGroup>
-  
-  <ItemGroup>
+
     <None Update="NNekoTriggers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+
     <EmbeddedResource Include="images\ttrig.png" />
     <EmbeddedResource Include="images\ttrig.ico" />
   </ItemGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <PackageReference Include="ECommons" Version="3.1.0.22" />
+  </ItemGroup>
+
 </Project>
