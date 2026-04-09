@@ -3,6 +3,7 @@ using Dalamud.Game.Gui.Dtr;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface.Windowing;
+using Dalamud.Plugin.Services;
 using ECommons.DalamudServices;
 using ECommons.Logging;
 using NNekoTriggers.Helpers;
@@ -106,8 +107,10 @@ namespace NNekoTriggers.UI
 
             // Ensure the DTR bar is ready
             if (DtrBar.Entries.Count == 0)
+            {
                 return;
-
+            }
+            
             // Initialize your own entries safely
             InitializeDtrEntries();
 
