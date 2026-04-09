@@ -61,7 +61,7 @@ namespace NNekoTriggers.UI
             GearsetEntry.Shown = false;
             OverrideEntry.Shown = false;
             OnLoginEntry.Shown = false;
-            
+
             Framework.Update += OnFrameworkUpdate;
         }
 
