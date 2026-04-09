@@ -20,6 +20,19 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <SourceRevisionId Condition="'$(GITHUB_SHA)' != ''">$(GITHUB_SHA)</SourceRevisionId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyInformationalVersionAttribute">
+      <_Parameter1>$(Version)+$(SourceRevisionId)</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+
+  <PropertyGroup>
     <Deterministic>true</Deterministic>
     <CopyLocalLockfileAssemblies>true</CopyLocalLockfileAssemblies>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
