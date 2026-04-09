@@ -4,7 +4,7 @@
 
   
 ### NNekoTriggers
-Automatically execute commands under certain conditions.
+Modular trigger system with DTR integration.
 
 [![Latest Stable](https://img.shields.io/github/v/release/NNekoPlugins/NNekoTriggers?color=blue&label=Stable)](https://github.com/NNekoPlugins/NNekoTriggers/releases/latest)
 
@@ -15,7 +15,7 @@ Automatically execute commands under certain conditions.
 ---
 
 ## About 
-Travelcase derivative that runs commands rather than changing gearset or appearance.
+Provides zone triggers, RNG triggers, job-swap triggers, login triggers, and more.
 
 ## Features
 - Set a per-character command for:
