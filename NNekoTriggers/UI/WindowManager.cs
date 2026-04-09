@@ -1,4 +1,3 @@
-using Dalamud.Game.Gui;
 using Dalamud.Game.Gui.Dtr;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
@@ -17,8 +16,8 @@ namespace NNekoTriggers.UI
         private readonly IFramework Framework;
         private readonly IDtrBar DtrBar;
 
-        private bool dtrHooked = false;
-        private int ticksWaited = 0;
+        private bool dtrHooked;
+        private int ticksWaited;
         private const int MaxTicks = 600; // ~10 seconds
 
         /// <summary>
@@ -53,17 +52,17 @@ namespace NNekoTriggers.UI
             NNekoTriggers.ClientState.Logout += this.OnLogout;
             NNekoTriggers.PluginInterface.UiBuilder.OpenConfigUi += this.ToggleConfigWindow;
             NNekoTriggers.PluginInterface.UiBuilder.OpenMainUi += this.ToggleConfigWindow;
-            Framework = framework;
-            DtrBar = dtrBar;
+            this.Framework = framework;
+            this.DtrBar = dtrBar;
 
-            RpOnlyEntry.Shown = false;
-            RngEntry.Shown = false;
-            ZoneEntry.Shown = false;
-            GearsetEntry.Shown = false;
-            OverrideEntry.Shown = false;
-            OnLoginEntry.Shown = false;
+            this.RpOnlyEntry.Shown = false;
+            this.RngEntry.Shown = false;
+            this.ZoneEntry.Shown = false;
+            this.GearsetEntry.Shown = false;
+            this.OverrideEntry.Shown = false;
+            this.OnLoginEntry.Shown = false;
 
-            Framework.Update += OnFrameworkUpdate;
+            this.Framework.Update += this.OnFrameworkUpdate;
         }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace NNekoTriggers.UI
                 ObjectDisposedException.ThrowIf(this.disposedValue, nameof(this.windowingSystem));
                 return;
             }
-            Framework.Update -= OnFrameworkUpdate;
+            this.Framework.Update -= this.OnFrameworkUpdate;
             this.RpOnlyEntry.Remove();
             this.RngEntry.Remove();
             this.ZoneEntry.Remove();
@@ -99,35 +98,40 @@ namespace NNekoTriggers.UI
 
         private void OnFrameworkUpdate(IFramework _)
         {
-            if (dtrHooked || ticksWaited++ > MaxTicks)
+            if (this.dtrHooked || this.ticksWaited++ > MaxTicks)
             {
-                Framework.Update -= OnFrameworkUpdate;
+                this.Framework.Update -= this.OnFrameworkUpdate;
                 return;
             }
 
             // Ensure the DTR bar is ready
-            if (DtrBar.Entries.Count == 0)
+            if (this.DtrBar.Entries.Count == 0)
             {
                 return;
             }
-            
-            // Initialize your own entries safely
-            InitializeDtrEntries();
 
-            dtrHooked = true;
-            Framework.Update -= OnFrameworkUpdate;
+            // Initialize your own entries safely
+            this.InitializeDtrEntries();
+
+            this.dtrHooked = true;
+            this.Framework.Update -= this.OnFrameworkUpdate;
 
             // Now that entries exist, update their text/icons
-            UpdateDtrEntry();
+            this.UpdateDtrEntry();
         }
 
         private void InitializeDtrEntries()
         {
-            if (dtrHooked)
+            if (this.dtrHooked)
+            {
                 return;
+            }
+
             var config = Utils.GetCharacterConfig();
             if (config == null)
+            {
                 return;
+            }
 
             // Attach click handlers ONLY here
             this.RpOnlyEntry.OnClick = ev =>
@@ -267,11 +271,11 @@ namespace NNekoTriggers.UI
             {
                 return;
             }
-            if (!dtrHooked)
+            if (!this.dtrHooked)
             {
                 return;
             }
-            
+
             if (config.PluginEnabled && config.ShowInDtr)
             {
                 if (config.RpOnlyInDtr)
