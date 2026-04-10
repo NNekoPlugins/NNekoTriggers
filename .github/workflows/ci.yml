@@ -1,11 +1,10 @@
-name: CI
+name: call-org-ci
 
 on:
   push:
-    branches: ["**"]
+    branches: [ main ]
   pull_request:
-    branches: ["**"]
 
 jobs:
-  call-org-ci:
+  build:
     uses: NNekoPlugins/.github/.github/workflows/ci.yml@main
