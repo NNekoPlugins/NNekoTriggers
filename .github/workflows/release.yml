@@ -3,8 +3,8 @@ name: Release
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*"
 
 jobs:
-  call-org-release:
+  release:
     uses: NNekoPlugins/.github/.github/workflows/release.yml@main
