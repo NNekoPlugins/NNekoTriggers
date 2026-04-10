@@ -35,4 +35,3 @@ This plugin can be installed as a 3rd-party plugin via the Dalamud Plugin Instal
 
 ```
 https://raw.githubusercontent.com/NNekoPlugins/NNekoTriggers/main/repo.json
-```
