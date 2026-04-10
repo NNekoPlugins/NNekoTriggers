@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/14.0.2">
-
   <!-- Plugin metadata -->
   <PropertyGroup>
     <Name>NNekoTriggers</Name>
@@ -16,7 +15,7 @@
       Override Command (Forces the commands for all other triggers to use a master command)
     </Description>
     <Tags>NNeko,NaughtyNeko,Triggers,RP,Conditional,Commands,Utility,Other</Tags>
-    <DalamudHeadless>true</DalamudHeadless>
+    <DalamudSkipInstall>true</DalamudSkipInstall>
     <WarningLevel>4</WarningLevel>
     <PackageLicenseExpression>APGL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
