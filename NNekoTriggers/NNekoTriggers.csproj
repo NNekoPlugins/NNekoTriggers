@@ -20,6 +20,10 @@
     <PackageLicenseExpression>APGL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DalamudHeadless>true</DalamudHeadless>
+  </PropertyGroup>
+
   <!-- Version stamping (GitVersion supplied by CI workflow) -->
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
