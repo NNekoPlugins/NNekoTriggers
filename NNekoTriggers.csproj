@@ -19,7 +19,7 @@
     <WarningLevel>4</WarningLevel>
     <PackageLicenseExpression>APGL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
-  
+
   <!-- Version stamping (GitVersion supplied by CI workflow) -->
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -44,11 +44,6 @@
 
   <!-- Resources -->
   <ItemGroup>
-    <Content Include=".\images\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
     <Content Include="CHANGELOG.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -56,9 +51,6 @@
     <None Update="NNekoTriggers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-
-    <EmbeddedResource Include="images\ttrig.png" />
-    <EmbeddedResource Include="images\ttrig.ico" />
   </ItemGroup>
 
   <!-- Dependencies -->
