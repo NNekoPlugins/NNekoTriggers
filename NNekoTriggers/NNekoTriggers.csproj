@@ -16,14 +16,11 @@
       Override Command (Forces the commands for all other triggers to use a master command)
     </Description>
     <Tags>NNeko,NaughtyNeko,Triggers,RP,Conditional,Commands,Utility,Other</Tags>
+    <DalamudHeadless>true</DalamudHeadless>
     <WarningLevel>4</WarningLevel>
     <PackageLicenseExpression>APGL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <DalamudHeadless>true</DalamudHeadless>
-  </PropertyGroup>
-
+  
   <!-- Version stamping (GitVersion supplied by CI workflow) -->
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
