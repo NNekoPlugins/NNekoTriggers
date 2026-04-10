@@ -5,6 +5,7 @@
     <Name>NNekoTriggers</Name>
     <Author>NaughtyNeko</Author>
     <Punchline>Automatically execute commands under certain conditions.</Punchline>
+    <DalamudSkipInstall>true</DalamudSkipInstall>
     <Description>
       Set a per-character command for:
       After changing Zones (Teleport, Return, walking outside, et cetera)
@@ -15,7 +16,6 @@
       Override Command (Forces the commands for all other triggers to use a master command)
     </Description>
     <Tags>NNeko,NaughtyNeko,Triggers,RP,Conditional,Commands,Utility,Other</Tags>
-    <DalamudSkipInstall>true</DalamudSkipInstall>
     <WarningLevel>4</WarningLevel>
     <PackageLicenseExpression>APGL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
