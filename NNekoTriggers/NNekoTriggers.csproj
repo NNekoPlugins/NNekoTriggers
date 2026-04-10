@@ -2,10 +2,10 @@
 <Project Sdk="Dalamud.NET.Sdk/14.0.2">
   <!-- Plugin metadata -->
   <PropertyGroup>
+    <DalamudSkipInstall>true</DalamudSkipInstall>
     <Name>NNekoTriggers</Name>
     <Author>NaughtyNeko</Author>
     <Punchline>Automatically execute commands under certain conditions.</Punchline>
-    <DalamudSkipInstall>true</DalamudSkipInstall>
     <Description>
       Set a per-character command for:
       After changing Zones (Teleport, Return, walking outside, et cetera)
