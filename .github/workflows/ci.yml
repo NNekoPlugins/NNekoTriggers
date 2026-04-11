@@ -7,4 +7,4 @@ on:
 
 jobs:
   build:
-    uses: NNekoPlugins/.github/.github/workflows/ci.yml@main
+    uses: NNekoPlugins/.github/.github/workflows/plugin-ci.yml@main
