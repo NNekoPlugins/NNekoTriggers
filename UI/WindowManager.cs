@@ -95,7 +95,11 @@ namespace NNekoTriggers.UI
             this.disposedValue = true;
         }
 
-
+        /// <summary>
+        ///     Waits for UI and DTR resources to load to prevent premature initializations.
+        ///     Translation: The DTR bar features will most likely break your shite if this isn't here.
+        /// </summary>
+        /// <param name="_"></param>
         private void OnFrameworkUpdate(IFramework _)
         {
             if (this.dtrHooked || this.ticksWaited++ > MaxTicks)
@@ -120,6 +124,9 @@ namespace NNekoTriggers.UI
             this.UpdateDtrEntry();
         }
 
+        /// <summary>
+        ///     Initializes the DTR entries, and adds their click events.
+        /// </summary>
         private void InitializeDtrEntries()
         {
             if (this.dtrHooked)
