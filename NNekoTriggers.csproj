@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/14.0.2">
-  <!-- Plugin metadata -->
   <PropertyGroup>
-    <DalamudSkipInstall>true</DalamudSkipInstall>
-    <UseDalamud>true</UseDalamud>
-
     <Name>NNekoTriggers</Name>
     <Author>NaughtyNeko</Author>
     <Punchline>Automatically execute commands under certain conditions.</Punchline>
@@ -53,6 +49,9 @@
     <None Update="NNekoTriggers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    </Content>
+
+    <Content Include="Data\NNeko.png" />
   </ItemGroup>
 
   <!-- Dependencies -->
@@ -60,4 +59,11 @@
     <PackageReference Include="ECommons" Version="3.1.0.22" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <None Update="NNekoTriggers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Data\NNeko.png" />
+  </ItemGroup>
 </Project>

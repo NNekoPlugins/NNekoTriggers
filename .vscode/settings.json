@@ -1,0 +1,25 @@
+{
+  "dotnet.server.useOmnisharp": false,
+  "dotnet.disableMSBuildLoad": true,
+
+  "dotnet.formatOnSave": false,
+  "dotnet.formatOnCommit": false,
+  "dotnet.formatting.enable": false,
+
+  "dotnet.codeAnalysis.runOnCommit": "never",
+  "dotnet.workspaceMode": "none",
+
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {},
+
+  "omnisharp.enableRoslynAnalyzers": false,
+  "omnisharp.enableEditorConfigSupport": false,
+  "omnisharp.enableDecompilationSupport": false,
+  "omnisharp.useModernNet": true,
+  "omnisharp.projectLoadTimeout": 60,
+
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true
+  }
+}
