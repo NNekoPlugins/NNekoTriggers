@@ -1,0 +1,12 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    uses: NNekoPlugins/.github/.github/workflows/plugin-release.yml@main
+    with:
+      version: ${{ github.ref_name }}

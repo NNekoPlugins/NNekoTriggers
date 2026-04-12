@@ -1,3 +1,9 @@
+v1.8 - Bugfixes and Improvements
+v1.7 - Bugfixes and Improvements
+v1.6 - Bugfixes and Improvements
+v1.5 - Bugfixes and Improvements
+- Fix a bug where the DTR toggle for left clicks would stop
+- Included in major repository ecosystem cleanup and reorganization.
 v1.4 - Buxfixes
 - Addresses a bug with DTR toggles no longer working for left clicks.
 v1.3 - Command Handler Improvments

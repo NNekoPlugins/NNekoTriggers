@@ -8,8 +8,8 @@ using ECommons;
 using ECommons.GameHelpers;
 using NNekoTriggers.Command;
 using NNekoTriggers.Configuration;
-using NNekoTriggers.UI;
 using NNekoTriggers.Helpers;
+using NNekoTriggers.UI;
 using Task = System.Threading.Tasks.Task;
 using TerritoryType = Lumina.Excel.Sheets.TerritoryType;
 
@@ -237,6 +237,9 @@ namespace NNekoTriggers
             }
         }
 
+        /// <summary>
+        ///     Handles the login trigger and custom execution.
+        /// </summary>
         private static void ClientState_OnLogin()
         {
             if (!ClientState.IsLoggedIn)
@@ -264,7 +267,7 @@ namespace NNekoTriggers
         }
 
         /// <summary>
-        /// Processes the command used for any changes in zone, map, or territory.
+        ///     Processes the command used for any changes in zone, map, or territory.
         /// </summary>
         /// <param name="characterConfig"></param>
         private static void HandleZoneTriggerENF(CharacterConfiguration characterConfig, CustomCommand command) => new Task(() =>
