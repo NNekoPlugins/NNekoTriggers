@@ -36,6 +36,8 @@
     <Content Include="CHANGELOG.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+
+    <Content Include="Data\NNeko.png" />
   </ItemGroup>
   
   <ItemGroup>
@@ -46,7 +48,6 @@
     <None Update="NNekoTriggers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <EmbeddedResource Include="images\ttrig.png" />
-    <EmbeddedResource Include="images\ttrig.ico" />
+    <EmbeddedResource Include="Data\NNeko.png" />
   </ItemGroup>
 </Project>

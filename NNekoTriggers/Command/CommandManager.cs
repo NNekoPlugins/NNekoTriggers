@@ -1,5 +1,4 @@
 using Dalamud.Game.Command;
-using ECommons;
 using ECommons.Logging;
 
 namespace NNekoTriggers.Command

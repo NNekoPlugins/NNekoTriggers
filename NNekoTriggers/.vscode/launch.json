@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to Dalamud",
+      "type": "clr",
+      "request": "attach",
+      "processName": "XIVLauncher.Core"
+    }
+  ]
+}
