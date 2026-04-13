@@ -1,5 +1,4 @@
 using Dalamud.Game.Command;
-using ECommons;
 using ECommons.Logging;
 
 namespace NNekoTriggers.Command
@@ -65,9 +64,9 @@ namespace NNekoTriggers.Command
 
             NNekoTriggers.Commands.AddHandler(GsetCmd, new CommandInfo(this.OnCommand)
             {
-                HelpMessage = "toggles the trigger." +
-                $"\n\t '{GsetCmd} on' enables the trigger." +
-                $"\n\t '{GsetCmd} off' disables the trigger.",
+                HelpMessage = "toggles the Job-Swap trigger." +
+                $"\n\t '{GsetCmd} on' enables the Job-Swap trigger." +
+                $"\n\t '{GsetCmd} off' disables the Job-Swap trigger.",
                 ShowInHelp = true
             });
 
@@ -87,20 +86,6 @@ namespace NNekoTriggers.Command
                 ShowInHelp = true
             });
 
-            /*NNekoTriggers.Commands.AddHandler(RngCmd, new CommandInfo(this.OnCommand)
-            {
-                HelpMessage = "Toggles the feature, and sets, increments, or reduces the bounds of your custom RNG range." +
-                "\n\t Use '/rng t' toggles the RNG feature on and off" +
-                "\n\t Use '/rng min <number>' sets Min to a fixed value. (default is 25)" +
-                "\n\t Use '/rng max <number>' sets Max to a fixed value. (default is 100)" +
-                "\n\t Use '/rng minAdd <number>' Adds <number> to the existing Min value. " +
-                "\n\t Use '/rng minSub <number>' Subtracts <number> from the existing Min value. " +
-                "\n\t Use '/rng maxAdd <number>' Adds <number> to the existing Max value. " +
-                "\n\t Use '/rng maxSub <number>' Subtracts <number> from the existing Max value. " +
-                "\n\t Use '/rng ' ",
-                ShowInHelp = true
-
-            });*/
         }
 
         /// <summary>

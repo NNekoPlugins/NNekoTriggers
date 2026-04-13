@@ -8,8 +8,8 @@ using ECommons;
 using ECommons.GameHelpers;
 using NNekoTriggers.Command;
 using NNekoTriggers.Configuration;
-using NNekoTriggers.UI;
 using NNekoTriggers.Helpers;
+using NNekoTriggers.UI;
 using Task = System.Threading.Tasks.Task;
 using TerritoryType = Lumina.Excel.Sheets.TerritoryType;
 
@@ -65,7 +65,7 @@ namespace NNekoTriggers
             ECommonsMain.Init(PluginInterface, this, Module.DalamudReflector);
             PluginConfiguration = PluginConfiguration.Load();
             AllowedTerritories = DataManager.Excel.GetSheet<TerritoryType>().Where(x => AllowedTerritoryUse.Contains(x.TerritoryIntendedUse.RowId) && !x.IsPvpZone);
-            WindowManager = new();
+            WindowManager = new(Framework, DtrBar);
             CommandManager = new();
             var config = Utils.GetCharacterConfig();
             WindowManager.UpdateDtrEntry();
@@ -237,6 +237,9 @@ namespace NNekoTriggers
             }
         }
 
+        /// <summary>
+        ///     Handles the login trigger and custom execution.
+        /// </summary>
         private static void ClientState_OnLogin()
         {
             if (!ClientState.IsLoggedIn)
@@ -264,7 +267,7 @@ namespace NNekoTriggers
         }
 
         /// <summary>
-        /// Processes the command used for any changes in zone, map, or territory.
+        ///     Processes the command used for any changes in zone, map, or territory.
         /// </summary>
         /// <param name="characterConfig"></param>
         private static void HandleZoneTriggerENF(CharacterConfiguration characterConfig, CustomCommand command) => new Task(() =>

@@ -1,3 +1,10 @@
+v2.0 - Major Rework (Expect and report bugs)
+- Restore functionality after a major break caused by Copilot's "helpful" suggestions.
+- Bugfixes and stability improvements that were pending release since v1.4 during the dumpster fire that was v1.5-v1.9.
+v1.5-v1.9 - Copilot being a pain
+- Maxing out daily image upload limits in Microsoft's AI services.
+- Breaking and finally restoring my entire plugin dev evironment.
+- Cursing and unseemly language is omitted from this changelog.
 v1.4 - Buxfixes
 - Addresses a bug with DTR toggles no longer working for left clicks.
 v1.3 - Command Handler Improvments

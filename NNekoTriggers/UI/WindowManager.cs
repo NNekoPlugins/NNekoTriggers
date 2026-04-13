@@ -2,6 +2,7 @@ using Dalamud.Game.Gui.Dtr;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface.Windowing;
+using Dalamud.Plugin.Services;
 using ECommons.DalamudServices;
 using ECommons.Logging;
 using NNekoTriggers.Helpers;
@@ -12,6 +13,12 @@ namespace NNekoTriggers.UI
     internal sealed class WindowManager : IDisposable
     {
         private bool disposedValue;
+        private readonly IFramework Framework;
+        private readonly IDtrBar DtrBar;
+
+        private bool dtrHooked;
+        private int ticksWaited;
+        private const int MaxTicks = 600; // ~10 seconds
 
         /// <summary>
         ///     All windows to add to the windowing system, holds all references.
@@ -33,7 +40,7 @@ namespace NNekoTriggers.UI
         /// <summary>
         ///     Initializes a new instance of the <see cref="WindowManager" /> class.
         /// </summary>
-        public WindowManager()
+        public WindowManager(IFramework framework, IDtrBar dtrBar)
         {
             this.windowingSystem = new WindowSystem(NNekoTriggers.PluginInterface.Manifest.InternalName);
             foreach (var window in this.windows)
@@ -45,96 +52,17 @@ namespace NNekoTriggers.UI
             NNekoTriggers.ClientState.Logout += this.OnLogout;
             NNekoTriggers.PluginInterface.UiBuilder.OpenConfigUi += this.ToggleConfigWindow;
             NNekoTriggers.PluginInterface.UiBuilder.OpenMainUi += this.ToggleConfigWindow;
-            var config = Utils.GetCharacterConfig();
-            if (config.PluginEnabled && config.ShowInDtr)
-            {
-                this.UpdateDtrEntry();
-                this.RpOnlyEntry.OnClick = ev =>
-                {
-                    if (ev.ClickType == MouseClickType.Right)
-                    {
-                        this.ToggleConfigWindow();
-                    }
-                    else
-                    {
-                        config.EnableRpOnly = !config.EnableRpOnly;
-                        NNekoTriggers.PluginConfiguration.Save();
-                        PluginLog.Information($"NNekoTriggers Roleplay Only Module {(config.EnableRpOnly ? "Enabled" : "Disabled")}");
-                        NNekoTriggers.WindowManager.UpdateDtrEntry();
-                    }
-                };
-                this.RngEntry.OnClick = ev =>
-                {
-                    if (ev.ClickType == MouseClickType.Right)
-                    {
-                        this.ToggleConfigWindow();
-                    }
-                    else
-                    {
-                        config.EnableRNG = !config.EnableRNG;
-                        NNekoTriggers.PluginConfiguration.Save();
-                        PluginLog.Information($"NNekoTriggers RNG Module {(config.EnableRNG ? "Enabled" : "Disabled")}");
-                        NNekoTriggers.WindowManager.UpdateDtrEntry();
-                    }
-                };
-                this.ZoneEntry.OnClick = ev =>
-                {
-                    if (ev.ClickType == MouseClickType.Right)
-                    {
-                        this.ToggleConfigWindow();
-                    }
-                    else
-                    {
-                        config.EnableZones = !config.EnableZones;
-                        NNekoTriggers.PluginConfiguration.Save();
-                        PluginLog.Information($"NNekoTriggers Territory Module {(config.EnableZones ? "Enabled" : "Disabled")}");
-                        NNekoTriggers.WindowManager.UpdateDtrEntry();
-                    }
-                };
-                this.GearsetEntry.OnClick = ev =>
-                {
-                    if (ev.ClickType == MouseClickType.Right)
-                    {
-                        this.ToggleConfigWindow();
-                    }
-                    else
-                    {
-                        config.EnableGset = !config.EnableGset;
-                        NNekoTriggers.PluginConfiguration.Save();
-                        PluginLog.Information($"NNekoTriggers Gearset Module {(config.EnableGset ? "Enabled" : "Disabled")}");
-                        NNekoTriggers.WindowManager.UpdateDtrEntry();
-                    }
-                };
-                this.OverrideEntry.OnClick = ev =>
-                {
-                    if (ev.ClickType == MouseClickType.Right)
-                    {
-                        this.ToggleConfigWindow();
-                    }
-                    else
-                    {
-                        config.EnableOcmd = !config.EnableOcmd;
-                        NNekoTriggers.PluginConfiguration.Save();
-                        PluginLog.Information($"NNekoTriggers Command Override Module {(config.EnableOcmd ? "Enabled" : "Disabled")}");
-                        NNekoTriggers.WindowManager.UpdateDtrEntry();
-                    }
-                };
-                this.OnLoginEntry.OnClick = ev =>
-                {
-                    if (ev.ClickType == MouseClickType.Right)
-                    {
-                        this.ToggleConfigWindow();
-                    }
-                    else
-                    {
-                        config.EnableOnLogin = !config.EnableOnLogin;
-                        NNekoTriggers.PluginConfiguration.Save();
-                        PluginLog.Information($"NNekoTriggers Login Module {(config.EnableOnLogin ? "Enabled" : "Disabled")}");
-                        NNekoTriggers.WindowManager.UpdateDtrEntry();
-                    }
-                };
-                //NNekoTriggers.WindowManager.UpdateDtrEntry();
-            }
+            this.Framework = framework;
+            this.DtrBar = dtrBar;
+
+            this.RpOnlyEntry.Shown = false;
+            this.RngEntry.Shown = false;
+            this.ZoneEntry.Shown = false;
+            this.GearsetEntry.Shown = false;
+            this.OverrideEntry.Shown = false;
+            this.OnLoginEntry.Shown = false;
+
+            this.Framework.Update += this.OnFrameworkUpdate;
         }
 
         /// <summary>
@@ -147,7 +75,7 @@ namespace NNekoTriggers.UI
                 ObjectDisposedException.ThrowIf(this.disposedValue, nameof(this.windowingSystem));
                 return;
             }
-            //var mgr = NNekoTriggers.WindowManager;
+            this.Framework.Update -= this.OnFrameworkUpdate;
             this.RpOnlyEntry.Remove();
             this.RngEntry.Remove();
             this.ZoneEntry.Remove();
@@ -166,6 +94,138 @@ namespace NNekoTriggers.UI
             }
             this.disposedValue = true;
         }
+
+
+        private void OnFrameworkUpdate(IFramework _)
+        {
+            if (this.dtrHooked || this.ticksWaited++ > MaxTicks)
+            {
+                this.Framework.Update -= this.OnFrameworkUpdate;
+                return;
+            }
+
+            // Ensure the DTR bar is ready
+            if (this.DtrBar.Entries.Count == 0)
+            {
+                return;
+            }
+
+            // Initialize your own entries safely
+            this.InitializeDtrEntries();
+
+            this.dtrHooked = true;
+            this.Framework.Update -= this.OnFrameworkUpdate;
+
+            // Now that entries exist, update their text/icons
+            this.UpdateDtrEntry();
+        }
+
+        private void InitializeDtrEntries()
+        {
+            if (this.dtrHooked)
+            {
+                return;
+            }
+
+            var config = Utils.GetCharacterConfig();
+            if (config == null)
+            {
+                return;
+            }
+
+            // Attach click handlers ONLY here
+            this.RpOnlyEntry.OnClick = ev =>
+            {
+                if (ev.ClickType == MouseClickType.Right)
+                {
+                    this.ToggleConfigWindow();
+                }
+                else
+                {
+                    config.EnableRpOnly = !config.EnableRpOnly;
+                    NNekoTriggers.PluginConfiguration.Save();
+                    PluginLog.Information($"NNekoTriggers Roleplay Only Module {(config.EnableRpOnly ? "Enabled" : "Disabled")}");
+                    this.UpdateDtrEntry();
+
+                }
+            };
+            this.RngEntry.OnClick = ev =>
+            {
+                if (ev.ClickType == MouseClickType.Right)
+                {
+                    this.ToggleConfigWindow();
+                }
+                else
+                {
+                    config.EnableRNG = !config.EnableRNG;
+                    NNekoTriggers.PluginConfiguration.Save();
+                    PluginLog.Information($"NNekoTriggers RNG Module {(config.EnableRNG ? "Enabled" : "Disabled")}");
+                    this.UpdateDtrEntry();
+
+                }
+            };
+            this.ZoneEntry.OnClick = ev =>
+            {
+                if (ev.ClickType == MouseClickType.Right)
+                {
+                    this.ToggleConfigWindow();
+                }
+                else
+                {
+                    config.EnableZones = !config.EnableZones;
+                    NNekoTriggers.PluginConfiguration.Save();
+                    PluginLog.Information($"NNekoTriggers Territory Module {(config.EnableZones ? "Enabled" : "Disabled")}");
+                    this.UpdateDtrEntry();
+
+                }
+            };
+            this.GearsetEntry.OnClick = ev =>
+            {
+                if (ev.ClickType == MouseClickType.Right)
+                {
+                    this.ToggleConfigWindow();
+                }
+                else
+                {
+                    config.EnableGset = !config.EnableGset;
+                    NNekoTriggers.PluginConfiguration.Save();
+                    PluginLog.Information($"NNekoTriggers Gearset Module {(config.EnableGset ? "Enabled" : "Disabled")}");
+                    this.UpdateDtrEntry();
+
+                }
+            };
+            this.OverrideEntry.OnClick = ev =>
+            {
+                if (ev.ClickType == MouseClickType.Right)
+                {
+                    this.ToggleConfigWindow();
+                }
+                else
+                {
+                    config.EnableOcmd = !config.EnableOcmd;
+                    NNekoTriggers.PluginConfiguration.Save();
+                    PluginLog.Information($"NNekoTriggers Command Override Module {(config.EnableOcmd ? "Enabled" : "Disabled")}");
+                    this.UpdateDtrEntry();
+
+                }
+            };
+            this.OnLoginEntry.OnClick = ev =>
+            {
+                if (ev.ClickType == MouseClickType.Right)
+                {
+                    this.ToggleConfigWindow();
+                }
+                else
+                {
+                    config.EnableOnLogin = !config.EnableOnLogin;
+                    NNekoTriggers.PluginConfiguration.Save();
+                    PluginLog.Information($"NNekoTriggers Login Module {(config.EnableOnLogin ? "Enabled" : "Disabled")}");
+                    this.UpdateDtrEntry();
+
+                }
+            };
+        }
+
 
         /// <summary>
         ///     Toggles the open state of the configuration window.
@@ -198,21 +258,8 @@ namespace NNekoTriggers.UI
         private void OnLogout(int type, int code)
         {
             NNekoTriggers.PluginInterface.UiBuilder.OpenConfigUi -= this.ToggleConfigWindow;
-            NNekoTriggers.PluginInterface.UiBuilder.OpenMainUi += this.ToggleConfigWindow;
+            NNekoTriggers.PluginInterface.UiBuilder.OpenMainUi -= this.ToggleConfigWindow;
         }
-
-        /*/// <summary>
-        ///     Enables a click event for the DTR (server info bar) menu entry.
-        /// </summary>
-        /// <param name="event"></param>
-        private void OnDtrInteractionEvent(DtrInteractionEvent @event)
-        {
-            if (@event == null)
-            {
-                return;
-            }
-            this.ToggleConfigWindow();
-        }*/
 
         /// <summary>
         /// Updates the plugin DTR element (Server Info Text)
@@ -224,11 +271,11 @@ namespace NNekoTriggers.UI
             {
                 return;
             }
-            /*this.RpOnlyEntry.Shown = false;
-            this.RngEntry.Shown = false;
-            this.ZoneEntry.Shown = false;
-            this.GearsetEntry.Shown = false;
-            this.OverrideEntry.Shown = false;*/
+            if (!this.dtrHooked)
+            {
+                return;
+            }
+
             if (config.PluginEnabled && config.ShowInDtr)
             {
                 if (config.RpOnlyInDtr)
