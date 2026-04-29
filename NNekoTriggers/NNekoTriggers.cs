@@ -210,7 +210,7 @@ namespace NNekoTriggers
         ///     Handles territory changes and custom command execution.
         /// </summary>
         /// <param name="territory"></param>
-        private void OnTerritoryChanged(ushort territory)
+        private void OnTerritoryChanged(uint territory)
         {
 
             if (!ClientState.IsLoggedIn)
