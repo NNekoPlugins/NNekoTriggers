@@ -10,7 +10,7 @@
         "RepoUrl": "https://github.com/NNekoPlugins/NNekoTriggers",
         "Tags": [ "utility", "other", "trigger", "conditions", "chat", "commands", "roleplay", "rp", "NaughtyNeko", "NNeko" ],
         "DalamudApiLevel": 15,
-        "LoadPriority": 69,
+        "LoadPriority": 0,
         "IconUrl": "https://raw.githubusercontent.com/NNekoPlugins/NNekoTriggers/main/NNekoTriggers/Data/NNeko.png",
         "IsHide": "False",
         "IsTestingExclusive": "False",
