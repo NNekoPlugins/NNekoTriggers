@@ -4,15 +4,15 @@ on:
   push:
     branches: [main]
     paths:
-      - "NNekoTriggers/**/*.cs"
-      - "NNekoTriggers/**/*.csproj"
-      - "NNekoTriggers/**/*.resx"
+      - "${GITHUB_REPOSITORY##*/}/**/*.cs"
+      - "${GITHUB_REPOSITORY##*/}/**/*.csproj"
+      - "${GITHUB_REPOSITORY##*/}/**/*.resx"
   pull_request:
     branches: [main]
     paths:
-      - "NNekoTriggers/**/*.cs"
-      - "NNekoTriggers/**/*.csproj"
-      - "NNekoTriggers/**/*.resx"
+      - "${GITHUB_REPOSITORY##*/}/**/*.cs"
+      - "${GITHUB_REPOSITORY##*/}/**/*.csproj"
+      - "${GITHUB_REPOSITORY##*/}/**/*.resx"
     types: [ready_for_review, opened, synchronize, reopened]
   workflow_dispatch:
 
