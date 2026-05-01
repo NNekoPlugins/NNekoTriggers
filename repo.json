@@ -1,12 +1,15 @@
 [
     {
-      "Author": "NaughtyNeko",
-      "Name": "NNeko's Conditional Triggers",
-      "Punchline": "Modular trigger system with DTR integration.",
-      "Description": "Provides zone triggers, RNG triggers, job-swap triggers, login triggers, and more.",
-      "Tags": [ "NNeko", "NaughtyNeko", "Triggers", "RP", "Conditional", "Commands", "Utility", "Other" ],
-      "CategoryTags": [ "Utility", "Other" ],
-      "IconUrl": "https://raw.githubusercontent.com/NNekoPlugins/NNekoTriggers/main/NNekoTriggers/Data/NNeko.png",
-      "RepoUrl": "https://github.com/NNekoPlugins/NNekoTriggers"
+        "Author": "NaughtyNeko",
+        "Name": "NNeko's Conditional Triggers",
+        "Punchline": "Modular trigger system with DTR integration.",
+        "Description": "Provides zone triggers, RNG triggers, job-swap triggers, login triggers, and more.",
+        "Tags": [ "NNeko", "NaughtyNeko", "Triggers", "RP", "Conditional", "Commands", "Utility", "Other" ],
+        "CategoryTags": [ "Utility", "Other" ],
+        "IconUrl": "https://raw.githubusercontent.com/NNekoPlugins/NNekoTriggers/main/NNekoTriggers/Data/NNeko.png",
+        "RepoUrl": "https://github.com/NNekoPlugins/NNekoTriggers",
+        "DownloadLinkInstall": "https://github.com/NNekoPlugins/NNekoTriggers/releases/download/v0.0.3.0/latest.zip",
+        "DownloadLinkTesting": "https://github.com/NNekoPlugins/NNekoTriggers/releases/download/v0.0.3.0/latest.zip",
+        "DownloadLinkUpdate": "https://github.com/NNekoPlugins/NNekoTriggers/releases/download/v0.0.3.0/latest.zip"
     }
 ]
