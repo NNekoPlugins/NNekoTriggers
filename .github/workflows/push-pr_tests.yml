@@ -30,7 +30,12 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
-
+      - name: Install Dalamud
+        run: |
+          mkdir -p ~/.xlcore/dalamud/Hooks/${{ matrix.dalamud-branch }}
+          curl -L https://github.com/goatcorp/dalamud-distrib/raw/master/${{ matrix.dalamud-branch }}/Dalamud.zip -o dalamud.zip
+          unzip -o dalamud.zip -d ~/.xlcore/dalamud/Hooks/${{ matrix.dalamud-branch }}
+          
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
