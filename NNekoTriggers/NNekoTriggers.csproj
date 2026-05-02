@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/15.0.0">
   <PropertyGroup>
-    <Name>NNeko's Conditional Triggers</Name>
+    <Name>NNekoTriggers</Name>
     <Author>NaughtyNeko</Author>
     <Punchline>Modular trigger system with DTR integration.</Punchline>
     <Description>
