@@ -39,8 +39,8 @@ jobs:
       - name: Install Dalamud
         run: |
           mkdir -p ~/.xlcore/dalamud/Hooks/${{ matrix.dalamud-branch }}
-          curl -L https://github.com/goatcorp/Dalamud/releases/tag/14.0.4.0 -o dalamud.zip
-          unzip -o dalamud.zip -d ~/.xlcore/dalamud/Hooks/${{ matrix.dalamud-branch }}
+          curl -L https://goatcorp.github.io/dalamud-distrib/latest.zip
+          unzip -o latest.zip -d ~/.xlcore/dalamud/Hooks/${{ matrix.dalamud-branch }}
 
       - name: Restore
         run: dotnet restore
