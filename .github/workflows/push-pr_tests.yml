@@ -30,6 +30,7 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
+          
       - name: Install Dalamud
         run: |
           mkdir -p ~/.xlcore/dalamud/Hooks/${{ matrix.dalamud-branch }}
