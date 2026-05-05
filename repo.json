@@ -13,6 +13,6 @@
         "DownloadLinkInstall": "https://github.com/NNekoPlugins/NNekoTriggers/releases/download/v0.0.3.5/latest.zip",
         "DownloadLinkTesting": "https://github.com/NNekoPlugins/NNekoTriggers/releases/download/v0.0.3.5/latest.zip",
         "DownloadLinkUpdate": "https://github.com/NNekoPlugins/NNekoTriggers/releases/download/v0.0.3.5/latest.zip",
-        "LoadPriority": "69"
+        "LoadPriority": 69
     }
 ]
