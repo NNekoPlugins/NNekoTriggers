@@ -1,4 +1,4 @@
-name: Push/PR: Tests
+name: "Push/PR: Tests"
 
 on:
   release:
