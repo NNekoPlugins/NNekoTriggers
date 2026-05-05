@@ -1,3 +1,5 @@
+name: "Push/PR: Tests"
+
 on:
   push:
     branches: [main]
