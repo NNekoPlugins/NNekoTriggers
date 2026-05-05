@@ -39,5 +39,5 @@ jobs:
         shell: pwsh
         run: |
           gh release upload "${{ github.event.release.tag_name }}" `
-            "bin/Release/NNekoTriggers/latest.zip" `
+            "https://github.com/NNekoPlugins/NNekoTriggers/releases/latest.zip" `
             --clobber
