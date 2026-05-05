@@ -1,4 +1,4 @@
-name: Release
+name: Push/PR: Tests
 
 on:
   release:
