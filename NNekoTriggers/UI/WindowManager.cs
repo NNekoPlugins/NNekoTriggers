@@ -16,7 +16,7 @@ namespace NNekoTriggers.UI
         private readonly IFramework Framework;
         private readonly IDtrBar DtrBar;
 
-        private bool dtrHooked;
+        public bool dtrHooked;
         private int ticksWaited;
         private const int MaxTicks = 600; // ~10 seconds
 
