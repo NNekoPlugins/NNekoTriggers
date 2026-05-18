@@ -23,6 +23,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: true
+          fetch-depth: 0
+          fetch-tags: true
+          lfs: false
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -34,7 +37,8 @@ jobs:
         uses: Blooym/setup-dalamud@v1.1.0
 
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore NNekoTriggers/NNekoTriggers.csproj
+
 
       - name: Build plugin in release mode
         run: dotnet build NNekoTriggers/NNekoTriggers.csproj -c Release --no-restore --nologo -o NNekoTriggers/bin/Release
@@ -58,7 +62,6 @@ jobs:
 
       - name: Update repo.json
         run: |
-          cd ../
 
           export TAG_NAME=$(echo ${{ github.ref_name }} | sed 's/^v//')
           export REPO_LOCATION=$(echo ${{ github.server_url }}/${{ github.repository }} | sed  's/\//\\\//g')
