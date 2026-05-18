@@ -58,7 +58,6 @@ jobs:
 
       - name: Update repo.json
         run: |
-          cd ../
 
           export TAG_NAME=$(echo ${{ github.ref_name }} | sed 's/^v//')
           export REPO_LOCATION=$(echo ${{ github.server_url }}/${{ github.repository }} | sed  's/\//\\\//g')
