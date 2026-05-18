@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: NNekoTriggers/
         shell: bash
     steps:
       - name: Checkout Repository
@@ -38,7 +37,7 @@ jobs:
         run: dotnet restore
 
       - name: Build plugin in release mode
-        run: dotnet build -c Release --no-restore --nologo -o ./bin/Release
+        run: dotnet build NNekoTriggers/NNekoTriggers.csproj -c Release --no-restore --nologo -o NNekoTriggers/bin/Release
 
       - name: Generate Checksums
         working-directory: NNekoTriggers/bin/Release/NNekoTriggers
