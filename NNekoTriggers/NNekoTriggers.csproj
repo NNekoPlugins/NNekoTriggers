@@ -57,7 +57,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 
     <!-- Fallback version if GitVersion is not provided -->
-    <Version>0.0.4.0</Version>
+    <Version>0.0.4.1</Version>
+    <GitVersion>0.0.4.1</GitVersion>
 
     <!-- These will be set by /p:GitVersion=1.2.3 in your workflow -->
     <AssemblyVersion>$(GitVersion)</AssemblyVersion>
