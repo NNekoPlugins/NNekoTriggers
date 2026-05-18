@@ -26,10 +26,11 @@ jobs:
         dalamud-branch: ["release", "stg"]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0
           submodules: true
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
