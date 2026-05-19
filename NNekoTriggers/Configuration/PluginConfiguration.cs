@@ -15,7 +15,7 @@ namespace NNekoTriggers.Configuration
     {
         public int Version { get; set; }
         public bool PluginEnabled = true;
-        public bool ShowInDtr = true;
+        public bool ShowInDtr;
         public bool RpOnlyInDtr;
         public bool OcmdInDtr;
         public bool RngInDtr;
